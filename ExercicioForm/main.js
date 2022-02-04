@@ -61,7 +61,7 @@ function cadastra(event) {
             senha: senha
         })
         
-        
+         
         let cadastros2 = document.getElementById("cadastrosNomes");
 
         let newHtml2 = `<li id="${id}${email1}" >${nome}</li>`
@@ -69,7 +69,7 @@ function cadastra(event) {
         let cadastros = document.getElementById("cadastrosEmail");
         //coisa antiga não usada
         // let newHtml = '<li id="'+email1+'">'+email1+'</li>'
-        let newHtml = `<li>${email1} <button type="button" id ="${id}" name ="editar" onclick="editar(${id})">editar</button></li>`
+        let newHtml = `<li>${email1}<button type="button" id ="${id}" name ="editar" onclick="editar(${id})">editar</button></li>`
         cadastros.innerHTML += newHtml
 
         alert("cadastrou")
@@ -88,7 +88,7 @@ function cadastra(event) {
 window.onload= ()=>{   
     document.getElementById("formEntra").onsubmit = evento=>entra(evento);
     document.getElementById("formCadastra").onsubmit = evento=>cadastra(evento);
-    document.querySelectorAll("")
+    
 }
 
 
@@ -101,10 +101,20 @@ function editar(id) {
             }
         })
         idNome = cadastroEtditavel.id + cadastroEtditavel.emailS
+        
+       console.log(cadastroEtditavel)
+       let nomeNoEditor = cadastroEtditavel.nome
+       let emailNoEditor = cadastroEtditavel.email
+       let senhaPassword = cadastroEtditavel.senha
 
-        let espacoEditor = document.getElementById(`"${cadastroEtditavel.id}"`)
-        let htmlEditor = `<label name ="editor">Nome</label><input name ="editor" type="text" id=novoNome value="${cadastroEtditavel.nome}"><label name ="editor">Email</label> <label name ="editor">${cadastroEtditavel.email}</label><label name ="editor">nova senha</label> <input name ="editor" type="password" id="novaSenha"><label name ="editor">Confirme a nova senha</label> <input name ="editor" id="confirmaNovaSenha" type="password">`
 
+
+        let espacoEditor = document.getElementById(`${id}`)
+        let htmlEditor = `<label name ="editor">Nome</label><input name ="editor" type="text" id=novoNome value=${nomeNoEditor}><label name ="editor">Email</label> <label name ="editor">${emailNoEditor}</label><label name ="editor">nova senha</label> <input name ="editor" type="password" id="novaSenha" value="${senhaPassword}"><label name ="editor">Confirme a nova senha</label> <input name ="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password">`
+
+        
+        espacoEditor.innerHTML += htmlEditor
+        document.getElementById(id).setAttribute("disabled","disabled")                            
     }
 
 function salvarEdicao(id) {
@@ -112,5 +122,36 @@ function salvarEdicao(id) {
         if(cadastro.id == id){
             return cadastro;
         }
+    let novoNome = document.getElementById("novoNome").value
+    let novaSenha = document.getElementById("novaSenha").value
+    let confirmaNovaSenha = document.getElementById("confirmaNovaSenha").value
+        
+        if (valorAntigo.nome!= novoNome) {
+            valorAntigo.nome = novoNome
+        }
+        
+        if (valorAntigo.senha != novaSenha && novaSenha === confirmaNovaSenha ) {
+            valorAntigo.senha = novaSenha
+        }else if (novaSenha != confirmaNovaSenha) {
+            alert("A Nova Senha Tá diferente da confirmação")
+            return
+        }else if (novaSenha == "") {
+            alert("A senha ta vazia")
+            return
+        }
+
+        if (valorAntigo.senha == novaSenha && valorAntigo.nome == novoNome) {
+            baseFalsa[id].senha = valorAntigo.senha;
+            baseFalsa[id].nome = valorAntigo.nome;
+            document.getElementById(`${id}${baseFalsa[id].email}`).value = valorAntigo.nome;
+            document.querySelectorAll(`name="editor"`).remove;
+
+
+        }
+
+
+        
+
+
     })
 }
