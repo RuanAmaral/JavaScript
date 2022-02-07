@@ -93,7 +93,7 @@ window.onload = () => {
     document.getElementById("formCadastra").onsubmit = evento => cadastra(evento);
     document.getElementById("btnEntrar").onclick = mostraEntrar;
     document.getElementById("btnCadastrar").onclick = mostraCadastra;
-   
+    
 }
 
 
@@ -101,14 +101,11 @@ window.onload = () => {
 function editar(id) {
 
     let cadastroEtditavel = baseFalsa.filter((cadastro) => {
-
-
         if (cadastro.id == id) {
-
             return cadastro;
-
         }
     })
+
     idNome = cadastroEtditavel[0].id + cadastroEtditavel.emailS
 
 
@@ -117,43 +114,52 @@ function editar(id) {
     let senhaPassword = cadastroEtditavel[0].senha
 
 
-
-
-    let espacoEditor = document.getElementById(`${id}`)
-    let htmlEditor = `<label name="editor">Nome</label>
-        <input name="editor" type="text" id=novoNome value=${nomeNoEditor}>
-        <label name="editor">Email</label> <label name="editor">${emailNoEditor}</label>
-        <label name="editor">nova senha</label>
-         <input name="editor" type="password" id="novaSenha" value="${senhaPassword}"><label name="editor">Confirme a nova senha</label>
-          <input name="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password">
-          <button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>`
-
-
-    espacoEditor.innerHTML = htmlEditor
-    document.getElementById(id).setAttribute("disabled", "disabled")
-    // document.getElementById(id).style.display = 'none'
-    document.getElementById("btnSalvar").onclick = salvarEdicao(id);
     
-   
+    let espacoEditor = document.getElementById(`cadastrao`)
+    let htmlEditor = `</button><label name="editor">Nome</label>
+    <input name="editor" type="text" id=novoNome value=${nomeNoEditor}>
+    <label name="editor">Email</label> <label name="editor">${emailNoEditor}</label>
+    <label name="editor">nova senha</label>
+    <input name="editor" type="password" id="novaSenha" value="${senhaPassword}"><label name="editor">Confirme a nova senha</label>
+    <input name="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password">
+    <button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>`
+    
+    
+    espacoEditor.innerHTML = htmlEditor
+    
+    // document.getElementById("cadastrao").setAttribute("disabled", "disabled");
+    // console.log(baseFalsa);
+
+    document.getElementById("btnSalvar").onclick = () => {
+        setTimeout(() => {
+            salvarEdicao(id)
+        }, 200);
+    }
+    // console.log(baseFalsa);
+
+
 }
 
 function salvarEdicao(id) {
-    let valorAntigo = baseFalsa.filter((cadastro) => {
-        if (cadastro.id == id) {
-            return cadastro;
+    console.log(baseFalsa);
+console.log(id)
+    let valorAntigo = baseFalsa[id];
+    console.log(baseFalsa);
+
+    
+    let novoNome = document.getElementById("novoNome").value
+    let novaSenha = document.getElementById("novaSenha").value
+    let confirmaNovaSenha = document.getElementById("confirmaNovaSenha").value
+    // console.log("tata")
+    console.log(novoNome);
+    console.log(novaSenha);
+    console.log(confirmaNovaSenha);
+        if (valorAntigo.nome != novoNome) {
+            valorAntigo.nome = novoNome
         }
 
-        console.log(id)
-        let novoNome = document.getElementById("novoNome").value
-        let novaSenha = document.getElementById("novaSenha").value
-        let confirmaNovaSenha = document.getElementById("confirmaNovaSenha").value
-
-        if (valorAntigo[0].nome != novoNome) {
-            valorAntigo[0].nome = novoNome
-        }
-
-        if (valorAntigo[0].senha != novaSenha && novaSenha === confirmaNovaSenha) {
-            valorAntigo[0].senha = novaSenha
+        if (valorAntigo.senha != novaSenha && novaSenha === confirmaNovaSenha) {
+            valorAntigo.senha = novaSenha
         } else if (novaSenha != confirmaNovaSenha) {
             alert("A Nova Senha Tá diferente da confirmação")
             return
@@ -161,18 +167,19 @@ function salvarEdicao(id) {
             alert("A senha ta vazia")
             return
         }
-        document.getElementById(id).setAttribute("enable", "enable")
-        document.getElementById(id).style.display = 'block'
+        // document.getElementById(id).setAttribute("enable", "enable")
+        // document.getElementById(id).style.display = 'block'
+       
 
-        if (valorAntigo[0].senha == novaSenha && valorAntigo.nome[0] == novoNome) {
+        console.log(`${id}${baseFalsa[id].email}`)
+        if (valorAntigo.senha == novaSenha && valorAntigo.nome == novoNome) {
             baseFalsa[id].senha = valorAntigo.senha;
             baseFalsa[id].nome = valorAntigo.nome;
-            document.getElementById(`${id}${baseFalsa[id].email}`).value = valorAntigo.nome;
-            document.querySelectorAll(`name="editor"`).remove();
-
+            document.getElementById(`${id}${baseFalsa[id].email}`).innerHTML = baseFalsa[id].nome;
+            document.getElementsByName(`editor`).remove;
 
         }
-    })
+
 }
 
 
