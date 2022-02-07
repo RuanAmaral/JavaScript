@@ -125,13 +125,16 @@ function editar(id) {
         <label name="editor">Email</label> <label name="editor">${emailNoEditor}</label>
         <label name="editor">nova senha</label>
          <input name="editor" type="password" id="novaSenha" value="${senhaPassword}"><label name="editor">Confirme a nova senha</label>
-          <input name="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password"><button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>`
+          <input name="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password">
+          <button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>`
 
 
     espacoEditor.innerHTML = htmlEditor
     document.getElementById(id).setAttribute("disabled", "disabled")
     // document.getElementById(id).style.display = 'none'
-    document.getElementById("btnSalvar").onclick = salvarEdicao(cadastroEtditavel[0].id);
+    document.getElementById("btnSalvar").onclick = salvarEdicao(id);
+    
+   
 }
 
 function salvarEdicao(id) {
@@ -140,7 +143,7 @@ function salvarEdicao(id) {
             return cadastro;
         }
 
-        console.log(valorAntigo)
+        console.log(id)
         let novoNome = document.getElementById("novoNome").value
         let novaSenha = document.getElementById("novaSenha").value
         let confirmaNovaSenha = document.getElementById("confirmaNovaSenha").value
