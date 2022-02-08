@@ -70,3 +70,8 @@ form{
     color: aliceblue;
     border-radius: 3px;
 }
+
+input{
+    border-radius: 15px;
+
+}
