@@ -97,6 +97,8 @@ window.onload = () => {
     document.getElementById("formCadastra").onsubmit = evento => cadastra(evento);
     document.getElementById("btnEntrar").onclick = mostraEntrar;
     document.getElementById("btnCadastrar").onclick = mostraCadastra;
+    document.getElementById("btnInicio").onclick = mostraInicio;
+
     
 }
 
@@ -198,4 +200,11 @@ function apagarRegistro(id) {
     
 document.getElementById(`cadastro${id}`).innerHTML ='';
 baseFalsa.splice(id,1)
+}
+
+function mostraInicio() {
+    document.getElementById("formCadastra").style.display = 'none'
+    document.getElementById("formEntra").style.display = 'none'
+    document.getElementById("btnEntrar").style.display = 'block'
+    document.getElementById("btnCadastrar").style.display = 'block'
 }
