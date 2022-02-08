@@ -65,15 +65,19 @@ function cadastra(event) {
         })
 
 
-        let cadastros2 = document.getElementById("cadastrosNomes");
+        let cadastros2 = document.getElementById("cadastroGeral");
 
-        let newHtml2 = `<li id="${id}${email1}" >${nome}</li>`
+        let newHtml2 = `<div id ="cadastro${id}"><li name ="${id}" id="${id}${email1}" >${nome}</li><li name ="${id}">${email1}<button type="button" id ="${id}" name ="editar" onclick="editar(${id})">editar</button>
+        <button type="button" id ="${id}" name ="apagar" onclick="apagarRegistro(${id})">deletar</button>
+        </li></div>`
         cadastros2.innerHTML += newHtml2
-        let cadastros = document.getElementById("cadastrosEmail");
+        // let cadastros = document.getElementById("cadastroGeral");
         //coisa antiga não usada
         // let newHtml = '<li id="'+email1+'">'+email1+'</li>'
-        let newHtml = `<li>${email1}<button type="button" id ="${id}" name ="editar" onclick="editar(${id})">editar</button></li>`
-        cadastros.innerHTML += newHtml
+        // let newHtml = `<li name ="${id}">${email1}<button type="button" id ="${id}" name ="editar" onclick="editar(${id})">editar</button>
+        // <button type="button" id ="${id}" name ="apagar" onclick="apagarRegistro(${id})">deletar</button>
+        // </li></div>`
+        // cadastros.innerHTML += newHtml
 
         alert("cadastrou")
         document.getElementById("nome").value = '';
@@ -116,44 +120,37 @@ function editar(id) {
 
     
     let espacoEditor = document.getElementById(`cadastrao`)
-    let htmlEditor = `</button><label name="editor">Nome</label>
+    let htmlEditor = `<div id ="editorzao">
+    </button><label name="editor">Nome</label>
     <input name="editor" type="text" id=novoNome value=${nomeNoEditor}>
     <label name="editor">Email</label> <label name="editor">${emailNoEditor}</label>
     <label name="editor">nova senha</label>
     <input name="editor" type="password" id="novaSenha" value="${senhaPassword}"><label name="editor">Confirme a nova senha</label>
     <input name="editor" value="${senhaPassword}" id="confirmaNovaSenha" type="password">
-    <button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>`
+    <button type="button"  name="editor"class="botao3" id="btnSalvar">Salvar</button>
+    </div>`
     
     
     espacoEditor.innerHTML = htmlEditor
     
     // document.getElementById("cadastrao").setAttribute("disabled", "disabled");
-    // console.log(baseFalsa);
 
     document.getElementById("btnSalvar").onclick = () => {
         setTimeout(() => {
             salvarEdicao(id)
         }, 200);
     }
-    // console.log(baseFalsa);
 
 
 }
 
 function salvarEdicao(id) {
-    console.log(baseFalsa);
-console.log(id)
     let valorAntigo = baseFalsa[id];
-    console.log(baseFalsa);
 
     
     let novoNome = document.getElementById("novoNome").value
     let novaSenha = document.getElementById("novaSenha").value
     let confirmaNovaSenha = document.getElementById("confirmaNovaSenha").value
-    // console.log("tata")
-    console.log(novoNome);
-    console.log(novaSenha);
-    console.log(confirmaNovaSenha);
         if (valorAntigo.nome != novoNome) {
             valorAntigo.nome = novoNome
         }
@@ -171,12 +168,11 @@ console.log(id)
         // document.getElementById(id).style.display = 'block'
        
 
-        console.log(`${id}${baseFalsa[id].email}`)
         if (valorAntigo.senha == novaSenha && valorAntigo.nome == novoNome) {
             baseFalsa[id].senha = valorAntigo.senha;
             baseFalsa[id].nome = valorAntigo.nome;
             document.getElementById(`${id}${baseFalsa[id].email}`).innerHTML = baseFalsa[id].nome;
-            document.getElementsByName(`editor`).remove;
+            document.getElementById("editorzao").innerHTML =''
 
         }
 
@@ -196,4 +192,10 @@ function mostraCadastra() {
     document.getElementById("btnEntrar").style.display = 'block'
     document.getElementById("btnCadastrar").style.display = 'none'
 
+}
+
+function apagarRegistro(id) {
+    
+document.getElementById(`cadastro${id}`).innerHTML ='';
+baseFalsa.splice(id,1)
 }
