@@ -1,0 +1,118 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+@font-face{
+    font-family: Roboto;
+    src: url(../Fonts/Roboto/Roboto-Light.ttf)
+}
+body{
+    font-family: Roboto;
+    font-size: 13.5px;
+}
+.caixa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(31, 33, 36, 0.95);
+}
+
+.caixa1{
+    height: 50%;
+    width: 368px;
+    color: rgb(209, 215, 221);
+    background-color:  rgb(54, 57, 63);
+    padding: 50px;
+    text-align: left;
+    /* box-shadow: rgb(0 0 0 / 60%) 0px 3px 6px; */
+    border-radius: 1%;
+    box-shadow: 0px 3px 6px black;    
+}
+
+button{
+    margin-bottom: 20px;
+    border-radius: 3px; 
+    border:none ;
+    background-color: rgb(240, 131, 27);
+    height: 40px;
+    width: 100%;
+}
+button:hover{
+    background-color: rgb(129, 72, 19);
+    cursor: pointer;
+}
+
+.caixaTexto1{
+    display: flex;
+    align-items: center;
+    background-color: rgb(44, 46, 51);
+    margin-bottom: 10px;
+    height: 40px;
+    padding: 0px 0px 0px 10px; 
+    border-radius: 3px;
+}
+.caixaTexto2{
+    display: flex;
+    align-items: center;
+    background-color: rgb(44, 46, 51);
+    margin-bottom: 10px;
+    height: 40px;
+    padding: 0px 0px 0px 10px; 
+    border-radius: 3px;
+}
+
+.caixaTexto{
+    background-color: transparent;
+    border: 0px;
+    color: white;
+    outline: none;
+    width: 100%;
+    font-family: Roboto;
+}
+
+p{
+    margin-bottom: 15px;
+}
+
+.divLinkA{
+    margin-bottom: 15px;
+}
+a{
+    text-decoration: underline;
+}
+a:hover{
+    cursor: pointer;
+    color: rgb(156, 160, 165);
+
+}
+
+img{
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+
+.copyright{
+    margin-top: 50px;
+}
+
+.alerta{
+    display: flex;
+    color: red;
+    font-size: 15px;
+    flex-direction: row ;
+}
+.alertaIcon{
+     color: red; 
+    height: 14px;
+    width: 14px;
+    margin-bottom: 15px;
+    padding-top: 2px;
+    margin-right:5px;
+}
+
+/* .caixa2{
+    width: 25px;
+} */
