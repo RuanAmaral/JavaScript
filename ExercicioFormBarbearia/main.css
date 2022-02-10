@@ -173,3 +173,65 @@ a:active {
      height: 100vh;
      margin-left: 294px;
  }
+
+ .balao{
+     display: flex;
+     justify-content: flex-start;
+     flex-direction: row;
+     position: fixed ;
+    /* margin-left: 0%; */
+    /* margin-left: 95%; */
+     background-color:#fbd9d9;
+     text-align: left;
+     border-radius: 3px;
+     width: 250px;
+     padding: 5px;
+     box-shadow: 0px 3px 6px black; 
+     
+ }
+
+ .balao h4{
+     justify-content: flex-start;
+ }
+ 
+  body .balao{
+     /* display: flex; */
+     justify-content: flex-end;
+     align-items: flex-start;
+     padding: 17px;
+     margin-left:78% ;
+     margin-top: 15px;
+     height: auto;
+     animation: apareceBalao 1s;
+ }
+
+ .exclamacao{
+     color: #ff0000;
+     padding-right: 10px ;
+ }
+
+ .textoBalao{
+     color: red;
+ }
+
+ .textoBalao span{
+     color: #ff5252;
+ }
+ .botaoFecha{
+    color: #ff5252;
+ }
+ .botaoFecha:hover{
+     cursor: pointer;
+ }
+
+ @keyframes apareceBalao {
+    from{
+        transform: translateX(50px);
+        
+
+    }
+    to{
+        transform: translateX(0);
+
+    }
+}

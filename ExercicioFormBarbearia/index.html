@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="barraLateralFixa">
+    <div id="barraLateral" class="barraLateralFixa">
         <div class="elementos">
             <div class="login">
                 <div class="divl=logo">
@@ -22,20 +22,22 @@
                     <h3>Faça seu logon</h3>
                 </div>
                 <div class="formulario">
-                    <div class="caixaTexto1" id="divCaixa1">
-                        <i class="fa-regular fa-envelope" id="icone1"></i>
-                        <input type="email"  id="emailC" class="caixaDeTexto caixa1" placeholder="E-mail">
-                    </div>
-                    <div class="caixaTexto2" id="divCaixa2">
-                        <i class="fa-solid fa-lock" id="icone2"></i>
-                        <input type="password" id="senhaC" class="caixaDeTexto caixa2" placeholder="Senha">
-                    </div>
-                    <button type="submit">Entrar</button>
+                    <form id="formEntra">
+                        <div class="caixaTexto1" id="divCaixa1">
+                            <i class="fa-regular fa-envelope" id="icone1"></i>
+                            <input type="email" id="emailC" class="caixaDeTexto caixa1" placeholder="E-mail">
+                        </div>
+                        <div class="caixaTexto2" id="divCaixa2">
+                            <i class="fa-solid fa-lock" id="icone2"></i>
+                            <input type="password" id="senhaC" class="caixaDeTexto caixa2" placeholder="Senha">
+                        </div>
+                        <button id="entrar" type="submit">Entrar</button>
+                    </form>
                 </div>
                 <a class="esquecido" href="#">Esqueci minha senha</a>
             </div>
             <div class="linkIcon">
-                
+
                 <a href="#"><i class="fa-solid fa-arrow-right-to-bracket"></i>Criar conta</a>
             </div>
         </div>

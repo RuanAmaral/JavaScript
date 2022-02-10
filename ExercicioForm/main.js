@@ -102,8 +102,6 @@ window.onload = () => {
     
 }
 
-
-
 function editar(id) {
 
     let cadastroEtditavel = baseFalsa.filter((cadastro) => {
