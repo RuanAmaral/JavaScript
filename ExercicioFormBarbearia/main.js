@@ -61,7 +61,7 @@ function apareceBalao(event) {
     document.body.insertBefore(balao, barraLateral);
 } else{
     document.getElementById("balao").style.display = 'flex'
-    setTimeout(()=> document.getElementById("balao").style.animation= "apareceBalao 1s;" )
+    setTimeout(()=> document.getElementById("balao").style.animation= "apareceBalao 2s;" )
 }
 
     // console.log('saiu')

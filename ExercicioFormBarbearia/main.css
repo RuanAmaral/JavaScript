@@ -202,7 +202,7 @@ a:active {
      margin-left:78% ;
      margin-top: 15px;
      height: auto;
-     animation: apareceBalao 1s;
+     animation: apareceBalao 2s;
  }
 
  .exclamacao{
@@ -226,7 +226,7 @@ a:active {
 
  @keyframes apareceBalao {
     from{
-        transform: translateX(50px);
+        transform: translateX(100px);
         
 
     }
