@@ -1,1 +1,0 @@
-const urlJason='./BancoDatabase.json'
