@@ -14,39 +14,34 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
         integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
+
+    <!-- <script type="text/javascript" src="./BancoDatabase.json"></script> -->
 </head>
 
 <body>
 
-    <table class="table">
-        
+    <table id="tabela" class="table table-bordered">
+        <tr>
+            <td>Indice</td>
+            <td>Nome</td>
+            <td>Gênero</td>
+            <td>Idade</td>
+            <td>Empresa</td>
+        </tr>
     </table>
 
     <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+        <ul class="pagination" id="numeroDePaginas">
+
         </ul>
     </nav>
 
 
-    <script src='main.js'></script>
+
+    <script type="text/javascript" src='main.js'></script>
 </body>
 
 </html>

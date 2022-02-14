@@ -11,3 +11,8 @@ body{
     height: 100vh;
     width: 100vh;
 } */
+
+a:hover{
+    cursor: pointer;
+
+}
