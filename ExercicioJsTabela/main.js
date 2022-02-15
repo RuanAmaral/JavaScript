@@ -51151,7 +51151,17 @@ const objJason = [
   }
 ]
 
-let paginaAtual = 1
+// if (localStorage.getItem("paginaAtuall") == undefined ) {
+  
+//   localStorage.setItem("paginaAtuall","1")
+// }
+
+if (localStorage.getItem("paginaAtuall") == undefined ) {
+  
+  localStorage.setItem("paginaAtuall","1")
+}
+let paginaAtual =parseInt(localStorage.getItem("paginaAtuall"))
+
 
 const tabelaVazia = `<table id="tabela" class="table table-bordered">
   <tr>
@@ -51181,20 +51191,20 @@ for (let i = 1; i <= numeroDePaginas; i++) {
   </li>`
   }
 }
-document.getElementById("elePag1").classList.add("active");
+document.getElementById(`elePag${paginaAtual}`).classList.add("active");
 // document.getElementById("pag1").disabled = true;
-
-for (let i = 0; i < 100; i++) {
-  document.getElementById("tabela").innerHTML += `
-    <tr>
-    <td>${objJason[i].index}</td>
-    <td>${objJason[i].name}</td>
-    <td>${objJason[i].gender}</td>
-    <td>${objJason[i].age}</td>
-    <td>${objJason[i].company}</td>
-    </tr>
-    `
-}
+selecionaPag(paginaAtual)
+// for (let i = 0; i < 100; i++) {
+//   document.getElementById("tabela").innerHTML += `
+//     <tr>
+//     <td>${objJason[i].index}</td>
+//     <td>${objJason[i].name}</td>
+//     <td>${objJason[i].gender}</td>
+//     <td>${objJason[i].age}</td>
+//     <td>${objJason[i].company}</td>
+//     </tr>
+//     `
+// }
 
 function selecionaPag(id) {
 document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
@@ -51213,6 +51223,7 @@ document.getElementById(`elePag${id}`).classList.add("active");
   document.getElementById("tabela").innerHTML = `${tabelaVazia}`
 
 paginaAtual = id
+localStorage.setItem("paginaAtuall", paginaAtual.toString())
 
 
   for (let i = numeroItens; i < numeroMaximo; i++) {
@@ -51233,8 +51244,12 @@ paginaAtual = id
 
 
 window.onload = () => {
-    document.getElementById("previous").onclick = ()=> voltaUmaPag(paginaAtual)
-    document.getElementById("next").onclick = () => avancaUmaPag(paginaAtual)
+  document.getElementById("previous").onclick = ()=> voltaUmaPag(paginaAtual)
+  document.getElementById("next").onclick = () => avancaUmaPag(paginaAtual)
+  document.getElementById("procura").onkeyup = () => procurar()
+   
+
+    
 }
 
 function voltaUmaPag(pag) {
@@ -51256,4 +51271,40 @@ function avancaUmaPag(pag) {
     selecionaPag(pag + 1)
   }
 
+}
+
+function procurar() {
+  let valor = document.getElementById("procura").value
+  let quantidadeLetra = valor.length
+  
+  
+  let valoresPesquisados = objJason.filter((elemento) =>{
+    if (elemento.name.substring(0,quantidadeLetra) == valor) {
+      return elemento
+    }
+   })
+
+   
+   if (valor =="" || valoresPesquisados.length == 0 ) {
+     selecionaPag(1)
+  }else{
+    let numeroDeObjetos = valoresPesquisados.length
+    if (numeroDeObjetos > 100){
+      
+    }
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    for (let i = 0; i < numeroDeObjetos; i++) {
+      document.getElementById("tabela").innerHTML += `
+      <tr>
+      <td>${valoresPesquisados[i].index}</td>
+      <td>${valoresPesquisados[i].name}</td>
+      <td>${valoresPesquisados[i].gender}</td>
+      <td>${valoresPesquisados[i].age}</td>
+      <td>${valoresPesquisados[i].company}</td>
+      </tr>
+      `
+    }
+   }
+
+   
 }
