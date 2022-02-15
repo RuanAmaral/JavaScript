@@ -46,3 +46,7 @@ a:hover{
     color: red;
     display: none;
 }
+
+#grupoDosBotoes{
+    margin-top: 12px;
+}

@@ -51151,10 +51151,6 @@ const objJason = [
   }
 ]
 
-// if (localStorage.getItem("paginaAtuall") == undefined ) {
-  
-//   localStorage.setItem("paginaAtuall","1")
-// }
 
 if (localStorage.getItem("paginaAtuall") == undefined ) {
   
@@ -51192,19 +51188,8 @@ for (let i = 1; i <= numeroDePaginas; i++) {
   }
 }
 document.getElementById(`elePag${paginaAtual}`).classList.add("active");
-// document.getElementById("pag1").disabled = true;
 selecionaPag(paginaAtual)
-// for (let i = 0; i < 100; i++) {
-//   document.getElementById("tabela").innerHTML += `
-//     <tr>
-//     <td>${objJason[i].index}</td>
-//     <td>${objJason[i].name}</td>
-//     <td>${objJason[i].gender}</td>
-//     <td>${objJason[i].age}</td>
-//     <td>${objJason[i].company}</td>
-//     </tr>
-//     `
-// }
+
 
 function selecionaPag(id) {
 document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
@@ -51237,19 +51222,30 @@ localStorage.setItem("paginaAtuall", paginaAtual.toString())
       </tr>
       `
   }
-  // document.getElementById("previous").value = id
-  // document.getElementById("next").value = id
+ 
 
 }
 
+document.getElementById("hNome").style.display = "flex"
+document.getElementById("hIndice").style.display = "none"
+document.getElementById("hIdade").style.display = "none"
+document.getElementById("hEmpresa").style.display = "none"
+
+let qualProcura = 2
+//1 -- Indice
+//2 -- Nome
+//3 -- Idade
+//4 -- Empresa
 
 window.onload = () => {
   document.getElementById("previous").onclick = ()=> voltaUmaPag(paginaAtual)
   document.getElementById("next").onclick = () => avancaUmaPag(paginaAtual)
   document.getElementById("procura").onkeyup = () => procurar()
-   
+  document.getElementById("btnIndice").onclick = () => selecionaPesquisarIndice()
+  document.getElementById("btnNome").onclick = () => selecionaPesquisarNome()
+  document.getElementById("btnIdade").onclick = () => selecionaPesquisarIdade()
+  document.getElementById("btnEmpresa").onclick = () => selecionaPesquisarEmpresa()
 
-    
 }
 
 function voltaUmaPag(pag) {
@@ -51272,11 +51268,10 @@ function avancaUmaPag(pag) {
 
 }
 
-function procurar() {
+function procurarNome() {
   let valor = document.getElementById("procura").value
   let quantidadeLetra = valor.length
   document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
-
 
   let valoresPesquisados = objJason.filter((elemento) =>{
     if (elemento.name.substring(0,quantidadeLetra).toUpperCase() == valor.toUpperCase()) {
@@ -51284,7 +51279,6 @@ function procurar() {
     }
    })
 
-   
    if (valor ==""  ) {
     document.getElementById("alertinha").style.display = "none"
 
@@ -51310,10 +51304,174 @@ function procurar() {
       </tr>
       `
     }
-    document.getElementById("alertinha").style.display = "none"
-
-    
+    document.getElementById("alertinha").style.display = "none"   
    }
 
-   
 }
+
+function procurar() {
+  if (qualProcura === 1) {
+    procurarIndice()
+  } else if (qualProcura === 2) {
+    procurarNome()
+  } else if(qualProcura === 3 ) {
+    procurarIdade()
+  }
+  else if (qualProcura === 4) {
+    procurarEmpresa()
+  }
+}
+
+function procurarIdade() {
+  let valor = document.getElementById("procura").value
+  let quantidadeLetra = valor.length
+  document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
+
+  let valoresPesquisados = objJason.filter((elemento) =>{
+    if (elemento.age.toString().substring(0,quantidadeLetra) == valor) {
+      return elemento
+    }
+   })
+
+   if (valor ==""  ) {
+    document.getElementById("alertinha").style.display = "none"
+
+    selecionaPag(1)
+  }else if(valoresPesquisados.length == 0){
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("alertinha").style.display = "flex"
+  }
+  else{
+    let numeroDeObjetos = valoresPesquisados.length
+    if (numeroDeObjetos > 100){
+      numeroDeObjetos = 99
+    }
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    for (let i = 0; i < numeroDeObjetos; i++) {
+      document.getElementById("tabela").innerHTML += `
+      <tr>
+      <td>${valoresPesquisados[i].index}</td>
+      <td>${valoresPesquisados[i].name}</td>
+      <td>${valoresPesquisados[i].gender}</td>
+      <td>${valoresPesquisados[i].age}</td>
+      <td>${valoresPesquisados[i].company}</td>
+      </tr>
+      `
+    }
+    document.getElementById("alertinha").style.display = "none"   
+   }
+}
+
+function procurarEmpresa(){
+  let valor = document.getElementById("procura").value
+  let quantidadeLetra = valor.length
+  document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
+
+  let valoresPesquisados = objJason.filter((elemento) =>{
+    if (elemento.company.substring(0,quantidadeLetra).toUpperCase() == valor.toUpperCase()) {
+      return elemento
+    }
+   })
+
+   if (valor ==""  ) {
+    document.getElementById("alertinha").style.display = "none"
+
+    selecionaPag(1)
+  }else if(valoresPesquisados.length == 0){
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("alertinha").style.display = "flex"
+  }
+  else{
+    let numeroDeObjetos = valoresPesquisados.length
+    if (numeroDeObjetos > 100){
+      numeroDeObjetos = 99
+    }
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    for (let i = 0; i < numeroDeObjetos; i++) {
+      document.getElementById("tabela").innerHTML += `
+      <tr>
+      <td>${valoresPesquisados[i].index}</td>
+      <td>${valoresPesquisados[i].name}</td>
+      <td>${valoresPesquisados[i].gender}</td>
+      <td>${valoresPesquisados[i].age}</td>
+      <td>${valoresPesquisados[i].company}</td>
+      </tr>
+      `
+    }
+    document.getElementById("alertinha").style.display = "none"   
+   }
+}
+
+function procurarIndice() {
+  let valor = document.getElementById("procura").value
+  let quantidadeLetra = valor.length
+  document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
+
+  let valoresPesquisados = objJason.filter((elemento) =>{
+    if (elemento.index.toString().substring(0,quantidadeLetra) == valor) {
+      return elemento
+    }
+   })
+
+   if (valor ==""  ) {
+    document.getElementById("alertinha").style.display = "none"
+
+    selecionaPag(1)
+  }else if(valoresPesquisados.length == 0){
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("alertinha").style.display = "flex"
+  }
+  else{
+    let numeroDeObjetos = valoresPesquisados.length
+    if (numeroDeObjetos > 100){
+      numeroDeObjetos = 99
+    }
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    for (let i = 0; i < numeroDeObjetos; i++) {
+      document.getElementById("tabela").innerHTML += `
+      <tr>
+      <td>${valoresPesquisados[i].index}</td>
+      <td>${valoresPesquisados[i].name}</td>
+      <td>${valoresPesquisados[i].gender}</td>
+      <td>${valoresPesquisados[i].age}</td>
+      <td>${valoresPesquisados[i].company}</td>
+      </tr>
+      `
+    }
+    document.getElementById("alertinha").style.display = "none"   
+   }
+}
+
+function selecionaPesquisarNome() {
+  qualProcura = 2
+  document.getElementById("hNome").style.display = "flex"
+  document.getElementById("hIndice").style.display = "none"
+  document.getElementById("hIdade").style.display = "none"
+  document.getElementById("hEmpresa").style.display = "none"
+
+}
+
+function selecionaPesquisarIndice() {
+  qualProcura = 1
+  document.getElementById("hNome").style.display = "none"
+  document.getElementById("hIndice").style.display = "flex"
+  document.getElementById("hIdade").style.display = "none"
+  document.getElementById("hEmpresa").style.display = "none"
+}
+
+function selecionaPesquisarIdade() {
+  qualProcura = 3  
+  document.getElementById("hNome").style.display = "none"
+  document.getElementById("hIndice").style.display = "none"
+  document.getElementById("hIdade").style.display = "flex"
+  document.getElementById("hEmpresa").style.display = "none"
+}
+
+function selecionaPesquisarEmpresa() {
+  qualProcura = 4
+  document.getElementById("hNome").style.display = "none"
+  document.getElementById("hIndice").style.display = "none"
+  document.getElementById("hIdade").style.display = "none"
+  document.getElementById("hEmpresa").style.display = "flex"
+}
+
