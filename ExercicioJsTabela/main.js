@@ -51255,7 +51255,6 @@ window.onload = () => {
 function voltaUmaPag(pag) {
   if (pag == 1) {
     selecionaPag(47)
-    console.log("entrou aqui")
   }
   else {
     selecionaPag(pag - 1)
@@ -51276,21 +51275,28 @@ function avancaUmaPag(pag) {
 function procurar() {
   let valor = document.getElementById("procura").value
   let quantidadeLetra = valor.length
-  
-  
+  document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
+
+
   let valoresPesquisados = objJason.filter((elemento) =>{
-    if (elemento.name.substring(0,quantidadeLetra) == valor) {
+    if (elemento.name.substring(0,quantidadeLetra).toUpperCase() == valor.toUpperCase()) {
       return elemento
     }
    })
 
    
-   if (valor =="" || valoresPesquisados.length == 0 ) {
-     selecionaPag(1)
-  }else{
+   if (valor ==""  ) {
+    document.getElementById("alertinha").style.display = "none"
+
+    selecionaPag(1)
+  }else if(valoresPesquisados.length == 0){
+    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("alertinha").style.display = "flex"
+  }
+  else{
     let numeroDeObjetos = valoresPesquisados.length
     if (numeroDeObjetos > 100){
-      
+      numeroDeObjetos = 99
     }
     document.getElementById("tabela").innerHTML = `${tabelaVazia}`
     for (let i = 0; i < numeroDeObjetos; i++) {
@@ -51304,6 +51310,9 @@ function procurar() {
       </tr>
       `
     }
+    document.getElementById("alertinha").style.display = "none"
+
+    
    }
 
    
