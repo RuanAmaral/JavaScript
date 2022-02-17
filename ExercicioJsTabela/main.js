@@ -51327,8 +51327,8 @@ window.onload = () => {
   document.getElementById("btnNome").onclick = () => selecionaPesquisarNome();
   document.getElementById("btnIdade").onclick = () => selecionaPesquisarIdade();
   document.getElementById("btnEmpresa").onclick = () => selecionaPesquisarEmpresa();
-  // document.getElementById("btnEnviar").onclick = () => 
-
+  document.getElementById("btnEnviar").onclick = () => enviaCsv();
+  
 }
 
 function voltaUmaPag(pag) {
@@ -51621,23 +51621,34 @@ function avanca10() {
 //     sheetname: "id"                     // (id, String), sheet name for the exported spreadsheet, (default: 'id')
   
 // });
-
- var table = TableExport(document.getElementById("tabela"),{
-  headers: true,                      // (Boolean), display table headers (th or td elements) in the <thead>, (default: true)
-  footers: true,                      // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
-  formats: ["csv"],    // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
-  filename: "tabelaNova",                     // (id, String), filename for the downloaded file, (default: 'id')
-  bootstrap: false,                   // (Boolean), style buttons using bootstrap, (default: true)
-  exportButtons: true,                // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
-  position: "bottom",                 // (top, bottom), position of the caption element relative to table, (default: 'bottom')
-  ignoreRows: null,                   // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
-  ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file(s) (default: null)
-  trimWhitespace: true,               // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s) (default: false)
-  RTL: false,                         // (Boolean), set direction of the worksheet to right-to-left (default: false)
-  sheetname: "tabelaNova"                     // (id, String), sheet name for the exported spreadsheet, (default: 'id')
-
-});
- var exportData = table; // useful for creating custom export buttons, i.e. when (exportButtons: false)
 // console.log(exportData)
+
+function enviaCsv() {
+  
+   var table = TableExport(document.getElementById("tabela"),{
+    headers: true,                      // (Boolean), display table headers (th or td elements) in the <thead>, (default: true)
+    footers: true,                      // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+    formats: ["csv"],    // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
+    filename: "tabelaNova",                     // (id, String), filename for the downloaded file, (default: 'id')
+    bootstrap: false,                   // (Boolean), style buttons using bootstrap, (default: true)
+    exportButtons: false,                // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
+    position: "bottom",                 // (top, bottom), position of the caption element relative to table, (default: 'bottom')
+    ignoreRows: null,                   // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
+    ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file(s) (default: null)
+    trimWhitespace: true,               // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s) (default: false)
+    RTL: false,                         // (Boolean), set direction of the worksheet to right-to-left (default: false)
+    sheetname: "tabelaNova"                     // (id, String), sheet name for the exported spreadsheet, (default: 'id')
+  
+  });
+   let exportData = table.getExportData(); // useful for creating custom export buttons, i.e. when (exportButtons: false)
+  
+console.log(exportData)
+let valorDoArquivoNovo = exportData.tabela.csv.data
+let valorDoArquivo = [valorDoArquivoNovo]
+// console.log(valorDoArquivo)
+var arquivoFinal = new Blob(valorDoArquivo, {type : 'text/csv'});
+saveAs(arquivoFinal);
+
+}
 
 
