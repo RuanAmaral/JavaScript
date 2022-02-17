@@ -24,22 +24,32 @@ a:hover{
     flex-direction: column;
     height: 100%;
     width: 100%;
+    position: relative;
+    bottom: 0%;
     
     /* margin: 50px 0px 0px 60px; */
 }
 
 .div2{
-     margin: 30px 120px 0px 120px; 
+     margin: 180px 120px 50px 120px; 
+     width: 80%;
 
     
 }
 
 .paginacao{
-    margin: 0px 200px 0px 200px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0px 20px 0px 500px; 
+    width: 100vh;
+    /* position: fixed;  */
 }
 
 .div1{
-    margin:  30px 120px 0px 120px; 
+    padding:  30px 120px 10px 120px; 
+    position: fixed;
+    background-color: rgb(63, 63, 71);
 }
 
 #alertinha{
@@ -50,3 +60,58 @@ a:hover{
 #grupoDosBotoes{
     margin-top: 12px;
 }
+
+.black{
+    font-weight: 850; 
+    color: black ;
+}
+h4{
+    color: aliceblue;
+}
+
+/* #numeroDePaginas{
+    display: block;
+} */
+
+#tabela{
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* : 100px !important;  */
+    
+}
+
+tbody{
+    width: 100%;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
+}
+
+footer{
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+    background-color: transparent;
+    padding: 0%;
+    margin: 0%;
+    
+}
+
+/* .divFooter{
+    position: relative;
+    bottom: 0;
+} */
+
+#btnEnviar{
+    position: fixed;
+    right: 5% ;
+    margin-top: 170px;
+}
+

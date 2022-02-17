@@ -14,16 +14,13 @@
         integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <!-- Latest compiled and minified JavaScript -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script> -->
-
+    
     <!-- <script type="text/javascript" src="./BancoDatabase.json"></script> -->
 </head>
 
 <body>
     <div class="centralizado">
-
+        
         <div class=" div1">
 
             <h4 id="hNome">Digite um Nome para pesquisar</h4>
@@ -49,22 +46,38 @@
                 </div>
             </div>
         </div>
+        <!-- <button id="btnEnviar" type="button" class="btn btn-primary">Enviar</button> -->
         <div class="div2">
             <table id="tabela" class="table table-bordered">
-                <tr>
-                    <td>Indice</td>
-                    <td>Nome</td>
-                    <td>Gênero</td>
-                    <td>Idade</td>
-                    <td>Empresa</td>
-                </tr>
+                <thead>
+                    <th class="black">Indice</th>
+                    <th class="black">Nome</th>
+                    <th class="black">Gênero</th>
+                    <th class="black">Idade</th>
+                    <th class="black">Empresa</th>
+                </thead>
+                <tbody id="tabelaCorpo">
+
+                </tbody>
             </table>
-            <nav class="paginacao" aria-label="Page navigation">
-                <ul class="pagination" id="numeroDePaginas">
-                </ul>
-            </nav>
         </div>
+     
+        <footer>
+        <nav class="paginacao" aria-label="Page navigation">
+            <ul class="pagination" id="numeroDePaginas">
+            </ul>
+        </nav>
+    </footer>
+
     </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+    <script src="./node_modules/file-saverjs/FileSaver.js"></script>
+    <script src="./node_modules/tableexport/dist/js/tableexport.js"></script>
+
     <script type="text/javascript" src='main.js'></script>
 </body>
 

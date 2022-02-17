@@ -51159,41 +51159,78 @@ if (localStorage.getItem("paginaAtuall") == undefined ) {
 let paginaAtual =parseInt(localStorage.getItem("paginaAtuall"))
 
 
-const tabelaVazia = `<table id="tabela" class="table table-bordered">
-  <tr>
-      <td>Indice</td>
-      <td>Nome</td>
-      <td>Gênero</td>
-      <td>Idade</td>
-      <td>Empresa</td>
-  </tr>
-</table>`
+const tabelaVazia = ``
 let numeroDePaginas = Math.floor(objJason.length / 100) + 1//47
 
 document.getElementById("numeroDePaginas").innerHTML += `
+<li>
+<a id="previous10" onclick="volta10()" aria-label="Previous">
+<span aria-hidden="true"> &laquo;</span>  
+</a>
+</li>
   <li>
     <a id="previous" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
+      <span aria-hidden="true">&lt;</span>
     </a>
   </li>
+  <li>
+  <a id="pagMenorTodas" onclick="selecionaPag(1)"aria-label="Previous">
+    <span aria-hidden="true">1</span>
+  </a>
+</li>
+<li>
+  <a id="meramenteIlustrativoMenor" aria-label="Previous">
+    <span aria-hidden="true">&hellip;</span>
+  </a>
+</li>
   `
 for (let i = 1; i <= numeroDePaginas; i++) {
   document.getElementById("numeroDePaginas").innerHTML += `<li id="elePag${i}"><a id="pag${i}" onclick="selecionaPag(${i})" value="${i}" >${i}</a></li>`
   if (i == numeroDePaginas) {
-    document.getElementById("numeroDePaginas").innerHTML += `<li>
-      <a  id="next" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-      </a>
-  </li>`
+    document.getElementById("numeroDePaginas").innerHTML += `
+    <li>
+  <a id="meramenteIlustrativoMaior" aria-label="Previous">
+    <span aria-hidden="true">&hellip;</span>
+  </a>
+</li>
+    <li>
+    <a id="pagMaiorTodas" onclick="selecionaPag(47)"  aria-label="Previous">
+    <span aria-hidden="true">47</span>
+    </a>
+    </li> 
+    <li>
+    <a  id="next" aria-label="Next">
+    <span aria-hidden="true">&gt;</span>
+    </a>
+    </li>
+  <li>
+  <a id="next10" onclick="avanca10()" aria-label="Next">
+  <span aria-hidden="true"> &raquo;</span>  
+  </a>
+  </li>
+  `
   }
 }
 document.getElementById(`elePag${paginaAtual}`).classList.add("active");
 selecionaPag(paginaAtual)
 
 
+if (paginaAtual - 10 <=0) {
+  document.getElementById("previous10").style.display="none"
+}else{
+  document.getElementById("previous10").style.display="flex"
+}
+if (paginaAtual + 10 >= 47) {
+  document.getElementById("next10").style.display="none"
+}else{
+  document.getElementById("next10").style.display="flex"
+}
+
 function selecionaPag(id) {
 document.getElementById(`elePag${paginaAtual}`).classList.remove("active");
 document.getElementById(`elePag${id}`).classList.add("active");
+
+
 
   let numeroItens = (id - 1) * 100
   let numeroMaximo = id
@@ -51205,14 +51242,14 @@ document.getElementById(`elePag${id}`).classList.add("active");
   if (numeroMaximo > 4649) {
     numeroMaximo = 4650
   }
-  document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+  document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
 
 paginaAtual = id
 localStorage.setItem("paginaAtuall", paginaAtual.toString())
 
 
   for (let i = numeroItens; i < numeroMaximo; i++) {
-    document.getElementById("tabela").innerHTML += `
+    document.getElementById("tabelaCorpo").innerHTML += `
       <tr>
       <td>${objJason[i].index}</td>
       <td>${objJason[i].name}</td>
@@ -51223,6 +51260,51 @@ localStorage.setItem("paginaAtuall", paginaAtual.toString())
       `
   }
  
+  if (paginaAtual - 10 <=0) {
+    document.getElementById("previous10").style.display="none"
+  }else{
+    document.getElementById("previous10").style.display="flex"
+  }
+  if (paginaAtual + 10 >= 47) {
+    document.getElementById("next10").style.display="none"
+  }else{
+    document.getElementById("next10").style.display="flex"
+  }
+
+  if (paginaAtual>=45) {
+    document.getElementById("meramenteIlustrativoMaior").style.display = "none"
+    document.getElementById("pagMaiorTodas").style.display = "none"
+    
+
+  } else {
+    document.getElementById("meramenteIlustrativoMaior").style.display = "flex"
+    document.getElementById("pagMaiorTodas").style.display = "flex"
+  }
+
+  if (paginaAtual<=3) {
+    document.getElementById("meramenteIlustrativoMenor").style.display = "none"
+    document.getElementById("pagMenorTodas").style.display = "none"
+    
+
+  } else {
+    document.getElementById("meramenteIlustrativoMenor").style.display = "flex"
+    document.getElementById("pagMenorTodas").style.display = "flex"
+  }
+
+  if (paginaAtual == 1) {
+    document.getElementById("previous").style.display = "none"
+  }
+  else{
+    document.getElementById("previous").style.display = "flex"    
+  }
+  if (paginaAtual == 47) {
+    document.getElementById("next").style.display = "none"
+  }
+  else{
+    document.getElementById("next").style.display = "flex"    
+  }
+
+  paginador()
 
 }
 
@@ -51238,13 +51320,14 @@ let qualProcura = 2
 //4 -- Empresa
 
 window.onload = () => {
-  document.getElementById("previous").onclick = ()=> voltaUmaPag(paginaAtual)
-  document.getElementById("next").onclick = () => avancaUmaPag(paginaAtual)
-  document.getElementById("procura").onkeyup = () => procurar()
-  document.getElementById("btnIndice").onclick = () => selecionaPesquisarIndice()
-  document.getElementById("btnNome").onclick = () => selecionaPesquisarNome()
-  document.getElementById("btnIdade").onclick = () => selecionaPesquisarIdade()
-  document.getElementById("btnEmpresa").onclick = () => selecionaPesquisarEmpresa()
+  document.getElementById("previous").onclick = ()=> voltaUmaPag(paginaAtual);
+  document.getElementById("next").onclick = () => avancaUmaPag(paginaAtual);
+  document.getElementById("procura").onkeyup = () => procurar();
+  document.getElementById("btnIndice").onclick = () => selecionaPesquisarIndice();
+  document.getElementById("btnNome").onclick = () => selecionaPesquisarNome();
+  document.getElementById("btnIdade").onclick = () => selecionaPesquisarIdade();
+  document.getElementById("btnEmpresa").onclick = () => selecionaPesquisarEmpresa();
+  // document.getElementById("btnEnviar").onclick = () => 
 
 }
 
@@ -51284,7 +51367,7 @@ function procurarNome() {
 
     selecionaPag(1)
   }else if(valoresPesquisados.length == 0){
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     document.getElementById("alertinha").style.display = "flex"
   }
   else{
@@ -51292,9 +51375,9 @@ function procurarNome() {
     if (numeroDeObjetos > 100){
       numeroDeObjetos = 99
     }
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     for (let i = 0; i < numeroDeObjetos; i++) {
-      document.getElementById("tabela").innerHTML += `
+      document.getElementById("tabelaCorpo").innerHTML += `
       <tr>
       <td>${valoresPesquisados[i].index}</td>
       <td>${valoresPesquisados[i].name}</td>
@@ -51338,7 +51421,7 @@ function procurarIdade() {
 
     selecionaPag(1)
   }else if(valoresPesquisados.length == 0){
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     document.getElementById("alertinha").style.display = "flex"
   }
   else{
@@ -51346,9 +51429,9 @@ function procurarIdade() {
     if (numeroDeObjetos > 100){
       numeroDeObjetos = 99
     }
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     for (let i = 0; i < numeroDeObjetos; i++) {
-      document.getElementById("tabela").innerHTML += `
+      document.getElementById("tabelaCorpo").innerHTML += `
       <tr>
       <td>${valoresPesquisados[i].index}</td>
       <td>${valoresPesquisados[i].name}</td>
@@ -51378,7 +51461,7 @@ function procurarEmpresa(){
 
     selecionaPag(1)
   }else if(valoresPesquisados.length == 0){
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     document.getElementById("alertinha").style.display = "flex"
   }
   else{
@@ -51386,9 +51469,9 @@ function procurarEmpresa(){
     if (numeroDeObjetos > 100){
       numeroDeObjetos = 99
     }
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     for (let i = 0; i < numeroDeObjetos; i++) {
-      document.getElementById("tabela").innerHTML += `
+      document.getElementById("tabelaCorpo").innerHTML += `
       <tr>
       <td>${valoresPesquisados[i].index}</td>
       <td>${valoresPesquisados[i].name}</td>
@@ -51418,7 +51501,7 @@ function procurarIndice() {
 
     selecionaPag(1)
   }else if(valoresPesquisados.length == 0){
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     document.getElementById("alertinha").style.display = "flex"
   }
   else{
@@ -51426,9 +51509,9 @@ function procurarIndice() {
     if (numeroDeObjetos > 100){
       numeroDeObjetos = 99
     }
-    document.getElementById("tabela").innerHTML = `${tabelaVazia}`
+    document.getElementById("tabelaCorpo").innerHTML = `${tabelaVazia}`
     for (let i = 0; i < numeroDeObjetos; i++) {
-      document.getElementById("tabela").innerHTML += `
+      document.getElementById("tabelaCorpo").innerHTML += `
       <tr>
       <td>${valoresPesquisados[i].index}</td>
       <td>${valoresPesquisados[i].name}</td>
@@ -51457,6 +51540,7 @@ function selecionaPesquisarIndice() {
   document.getElementById("hIndice").style.display = "flex"
   document.getElementById("hIdade").style.display = "none"
   document.getElementById("hEmpresa").style.display = "none"
+  selecionaPag(1)
 }
 
 function selecionaPesquisarIdade() {
@@ -51465,6 +51549,7 @@ function selecionaPesquisarIdade() {
   document.getElementById("hIndice").style.display = "none"
   document.getElementById("hIdade").style.display = "flex"
   document.getElementById("hEmpresa").style.display = "none"
+  selecionaPag(1)
 }
 
 function selecionaPesquisarEmpresa() {
@@ -51473,5 +51558,86 @@ function selecionaPesquisarEmpresa() {
   document.getElementById("hIndice").style.display = "none"
   document.getElementById("hIdade").style.display = "none"
   document.getElementById("hEmpresa").style.display = "flex"
+  selecionaPag(1)
 }
+
+function paginador() {
+   
+  let numeroDePaginasMaior = paginaAtual + 3
+  let numeroDePagiasMenor = paginaAtual - 3
+
+  if (numeroDePagiasMenor < 1) {
+    numeroDePagiasMenor = 0
+    numeroDePaginasMaior = 6
+  }
+  if (numeroDePaginasMaior > 47) {
+    for (let i = numeroDePaginasMaior; i > 48; i--) {
+      numeroDePaginasMaior --
+      if (numeroDePagiasMenor > (numeroDePagiasMenor - 5) ) {
+        numeroDePagiasMenor --
+      }
+    }
+    
+   }
+
+
+   for (let i = 1; i <= numeroDePaginas; i++) {
+     document.getElementById(`elePag${i}`).style.display = 'none'
+     
+   }
+   
+   
+   for (let i = paginaAtual; i < numeroDePaginasMaior; i++) {
+     document.getElementById(`elePag${i}`).style.display = 'flex';
+  }
+  for (let i = paginaAtual; i > numeroDePagiasMenor; i--) {
+    document.getElementById(`elePag${i}`).style.display = 'flex';
+ }
+ 
+}
+
+
+function volta10() {
+  selecionaPag(paginaAtual - 10)
+}
+
+function avanca10() {
+  selecionaPag(paginaAtual + 10)
+}
+
+
+//  $("table").tableExport({
+//     headers: true,                      // (Boolean), display table headers (th or td elements) in the <thead>, (default: true)
+//     footers: true,                      // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+//     formats: ["csv"],    // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
+//     filename: "tabelaNova",                     // (id, String), filename for the downloaded file, (default: 'id')
+//     bootstrap: true,                   // (Boolean), style buttons using bootstrap, (default: true)
+//     exportButtons: false,                // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
+//     position: "bottom",                 // (top, bottom), position of the caption element relative to table, (default: 'bottom')
+//     ignoreRows: null,                   // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
+//     ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file(s) (default: null)
+//     trimWhitespace: true,               // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s) (default: false)
+//     RTL: false,                         // (Boolean), set direction of the worksheet to right-to-left (default: false)
+//     sheetname: "id"                     // (id, String), sheet name for the exported spreadsheet, (default: 'id')
+  
+// });
+
+ var table = TableExport(document.getElementById("tabela"),{
+  headers: true,                      // (Boolean), display table headers (th or td elements) in the <thead>, (default: true)
+  footers: true,                      // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+  formats: ["csv"],    // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
+  filename: "tabelaNova",                     // (id, String), filename for the downloaded file, (default: 'id')
+  bootstrap: false,                   // (Boolean), style buttons using bootstrap, (default: true)
+  exportButtons: true,                // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
+  position: "bottom",                 // (top, bottom), position of the caption element relative to table, (default: 'bottom')
+  ignoreRows: null,                   // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
+  ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file(s) (default: null)
+  trimWhitespace: true,               // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s) (default: false)
+  RTL: false,                         // (Boolean), set direction of the worksheet to right-to-left (default: false)
+  sheetname: "tabelaNova"                     // (id, String), sheet name for the exported spreadsheet, (default: 'id')
+
+});
+ var exportData = table; // useful for creating custom export buttons, i.e. when (exportButtons: false)
+// console.log(exportData)
+
 
