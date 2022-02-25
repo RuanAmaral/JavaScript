@@ -1,0 +1,199 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+/* img{
+    height: 250px;
+    width: 200px;
+    padding: 2px;
+} */
+body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(./images/backgroundDungeon.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+}
+.divClasse{
+    overflow: hidden;
+}
+
+.divClasse img{
+    width:250px;
+    height:200px;
+    padding: 2px;
+    /* background-color:#dddddd;   */
+     transition-duration:2s; 
+     transition-delay: 100ms;
+    /* transform-origin: 0%  */
+}
+
+.divClasse:hover img{
+    cursor: pointer;
+    width: 500px;
+    height: 500px;
+     /* transform:scale(2);  */
+    /* height: 500px;
+   width: 500px;   */
+    
+    
+}
+   
+.divClasse p{
+    transition-duration: 2s;
+    transition-delay: 100ms;
+    text-align: center;
+        color: gainsboro;
+        font-style: oblique;
+}
+
+.divClasse:hover p{
+     font-size: 50px;      
+     color: aliceblue;
+     
+}
+    
+    /* div p{
+        text-align: center;
+        color: gainsboro;
+        font-style: oblique;
+} */
+
+
+.classeSelecionada{
+    position: fixed;
+    background-color: rgb(31, 33, 36);
+    height: 100vh;
+    width: 294px;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;flex-direction: column;
+    color: white;
+}
+
+.classeSelecionada img{
+    padding: 0%;
+    width: 100%;
+}
+
+#statsValues div{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn{
+    height: 4px;
+    width: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 3px 0px 3px;
+
+}
+
+#stats{
+    display: flex;
+    flex-direction: row;
+}
+
+#boataso{
+    width: 70px;
+}
+
+
+.listaArmas{
+    margin-left: 294px ;
+    width: 700px;
+    max-height: 500px;
+    background-color: transparent;
+    overflow-x: none;
+    overflow-y: scroll;
+
+    
+}
+
+.listaArmas tr:hover td{
+cursor: pointer;
+color: black !important;
+}
+
+.listaArmas thead{
+    position: relative;
+}
+
+#detalhes button{
+width: 100%;
+margin-bottom: 2px;
+height: 20px;
+margin-left: 0%;
+}
+
+#detalhes{
+    display: flex;
+    flex-direction: column;
+}
+
+.incompativel{
+    color: red !important;
+}
+
+#alerta{
+    right: 0px;
+    margin-right: 0%;
+    margin-left: 15px;
+    padding: 0px;
+    width: 100%;
+    height: 250px;
+
+}
+
+.textoAlert{
+    margin-left: 15px !important;
+}
+
+#detalhesAmais{
+    display: flex;
+    flex-direction: row;
+    margin-left: 294px;
+}
+
+.imagemFinal{
+    color: white;
+    position: fixed;
+    top: 1%;
+    left: 1%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .tabelaStatsFinal{
+
+} */
+
+/* #listagemFinais{
+    /* margin-top: 30px; */
+/*} */
+#tabelaStatsFinal{
+    position: fixed;
+    left: 2%;
+    top: 43%;
+}
+
+#dadosDoPersonagem{
+    height: 500px;
+    width: 500px;
+}
+
+#botaoBaixar{
+    width: 100px;
+    height: 45px;
+}
